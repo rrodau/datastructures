@@ -29,7 +29,7 @@ class Heap:
         @return:
             the index of the elements left child
         """
-        return idx * 2
+        return idx * 2 + 1
 
     def right_child_idx(self, idx: int) -> int:
         """
@@ -41,7 +41,7 @@ class Heap:
         @return:
             the index of the elements right child
         """
-        return idx * 2 + 1
+        return idx * 2 + 2
     
     def add(self, element) -> None:
         """
