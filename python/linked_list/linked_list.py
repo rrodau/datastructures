@@ -33,6 +33,8 @@ class LinkedList:
             None
         """
         new_node = Node(new_value)  # create a new node with the value
+        if self.head.get_value() is None:
+            self.head = new_node
         new_node.set_next_node(self.head)   # set the new nodes next node to the head node
         self.head = new_node       # update the head node to be the new node
 
@@ -51,6 +53,9 @@ class LinkedList:
                 self.append(value)
             return
         new_node = Node(new_value)  # create the new node
+        if self.head.get_value() is None:
+            self.head = new_node
+            return
         current_node = self.head
         while current_node.get_next_node(): # while end not reached
             current_node = current_node.get_next_node() # update current_node to be the next node
@@ -151,12 +156,23 @@ class LinkedList:
         node1.set_next_node(node2.get_next_node())
         node2.set_next_node(temp)
 
+    def get_value_at_idx(self, idx):
+        counter = 0
+        current_node = self.head
+        while counter != idx and current_node.get_next_node():
+            current_node = current_node.get_next_node()
+            counter += 1
+        if current_node is None or counter != idx:
+            print(f"index: {idx} out of bounds. Length of LinkedList: {counter+1}")
+            return
+        return current_node.get_value()
 
 ll = LinkedList()
 for i in range(10):
   ll.append(i)
-ll.append([i for i in range(10, 20)])
+ll.append([[j for j in range(i)] for i in range(10, 20)])
 ll.append(100)
 print(ll)
 ll.swap_nodes(0, 100)
+print(ll.get_value_at_idx(20))
 print(ll)
